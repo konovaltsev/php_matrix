@@ -33,8 +33,3 @@ zend_module_entry matrix_module_entry = {
 #ifdef COMPILE_DL_MATRIX
     ZEND_GET_MODULE(matrix)
 #endif
-
-//#include "matrix_functions.c"
-//#include "matrix_is_valid.c"
-//#include "matrix_dump.c"
-//#include "matrix_transpose.c"
