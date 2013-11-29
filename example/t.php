@@ -32,12 +32,12 @@ echo 'php: ' . ($t2 - $t1) . PHP_EOL;
 
 function p_transpose($matrix)
 {
-    $jCount = count($matrix);
-    $iCount = count($matrix[0]);
+    $m = count($matrix);
+    $n = count($matrix[0]);
     $ret    = array();
-    for($j = 0; $j < $jCount; ++$j)
+    for($j = 0; $j < $m; ++$j)
     {
-        for($i = 0; $i < $iCount; ++$i)
+        for($i = 0; $i < $n; ++$i)
         {
             $ret[$i][$j] = $matrix[$j][$i];
         }

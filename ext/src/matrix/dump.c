@@ -20,21 +20,21 @@ PHP_FUNCTION(matrix_dump)
         return;
     }
 
-      php_printf("matrix[%dx%d]:\n", m.iCount, m.jCount);
+      php_printf("matrix[%dx%d]:\n", m.m, m.n);
 
-    for(j = 0; j < m.jCount; ++j)
+    for(i = 0; i < m.m; ++i)
     {
         php_printf("|\t");
 
-        for(i = 0; i < m.iCount; ++i)
+        for(j = 0; j < m.n; ++j)
         {
-            switch(Z_TYPE_P(m.array[j][i]))
+            switch(Z_TYPE_P(m.matrix[i][j]))
             {
                 case IS_LONG:
-                    php_printf("%ld\t", Z_LVAL_P(m.array[j][i]));
+                    php_printf("%ld\t", Z_LVAL_P(m.matrix[i][j]));
                     break;
                 case IS_DOUBLE:
-                    php_printf("%.3f\t", Z_DVAL_P(m.array[j][i]));
+                    php_printf("%.3f\t", Z_DVAL_P(m.matrix[i][j]));
                     break;
                 default:
                     php_printf("<undef>\t");

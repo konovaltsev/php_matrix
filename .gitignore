@@ -1,6 +1,7 @@
 # Projects
 .idea
 *.cbp
+matrix.layout
 
 # Object files
 *.o

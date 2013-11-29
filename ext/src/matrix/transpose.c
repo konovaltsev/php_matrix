@@ -20,15 +20,15 @@ PHP_FUNCTION(matrix_transpose)
     }
 
     array_init(return_value);
-    for(j = 0; j < m.iCount; ++j)
+    for(j = 0; j < m.n; ++j)
     {
         MAKE_STD_ZVAL(row);
         array_init(row);
-        for(i = 0; i < m.jCount; ++i)
+        for(i = 0; i < m.m; ++i)
         {
-            add_next_index_zval(row, m.array[i][j]);
+            add_next_index_zval(row, m.matrix[i][j]);
         }
         add_next_index_zval(return_value, row);
     }
-    php_matrix_free_array(m);
+    php_matrix_free_matrix(m);
 }
