@@ -5,10 +5,10 @@
 int php_matrix_init_matrix(ZMatrix* out, zval* php_matrix)
 {
     zval **data, **data2;
-    int n, j_prev, m, i, j;
-    HashTable *ij_hash, *i_hash;
+    int n, m, i, j, idx;
+    HashTable *j_hash, *i_hash;
     HashPosition pointer, pointer2;
-    zval ***matrix;
+    zval **matrix;
 
     zval tmp;
 
@@ -22,41 +22,60 @@ int php_matrix_init_matrix(ZMatrix* out, zval* php_matrix)
     }
 
     i_hash = Z_ARRVAL_P(php_matrix);
+    zend_hash_internal_pointer_reset_ex(i_hash, &pointer);
     m = zend_hash_num_elements(i_hash);
-    matrix = emalloc(sizeof(zval*) * m);
+    if(zend_hash_get_current_data_ex(i_hash, (void**) &data, &pointer) == SUCCESS)
+    {
+        j_hash = Z_ARRVAL_PP(data);
+        n = zend_hash_num_elements(j_hash);
+    }
+    else
+    {
+        return FAILURE;
+    }
+    matrix = emalloc(sizeof(zval*) * m * n);
 
-    j_prev = -1;
-
+    idx = 0;
     for(
         i = 0, zend_hash_internal_pointer_reset_ex(i_hash, &pointer);
-        zend_hash_get_current_data_ex(i_hash, (void**) &data, &pointer) == SUCCESS;
+        i < m;
         ++i, zend_hash_move_forward_ex(i_hash, &pointer)
     )
     {
-        if (Z_TYPE_PP(data) != IS_ARRAY)
+        if
+        (
+            zend_hash_get_current_data_ex(i_hash, (void**) &data, &pointer) != SUCCESS
+            ||
+            Z_TYPE_PP(data) != IS_ARRAY
+        )
         {
-          return FAILURE;
-        }
-        j_hash = Z_ARRVAL_PP(data);
-        n = zend_hash_num_elements(j_hash);
-        if(n < 1 || (j_prev > 0 && j_prev != n))
-        {
-          return FAILURE;
+            efree(matrix);
+            return FAILURE;
         }
 
-        matrix[i] = emalloc(sizeof(zval*) * n);
+        j_hash = Z_ARRVAL_PP(data);
+        if(zend_hash_num_elements(j_hash) != n)
+        {
+            efree(matrix);
+            return FAILURE;
+        }
 
         for(
             j = 0, zend_hash_internal_pointer_reset_ex(j_hash, &pointer2);
-            zend_hash_get_current_data_ex(j_hash, (void**) &data2, &pointer2) == SUCCESS;
+            j < n;
             ++j, zend_hash_move_forward_ex(j_hash, &pointer2)
         )
         {
-            ALLOC_ZVAL(matrix[i][j]);
-            INIT_PZVAL_COPY(matrix[i][j], *data2);
-        }
+            if(zend_hash_get_current_data_ex(j_hash, (void**) &data2, &pointer2) != SUCCESS)
+            {
+                efree(matrix);
+                return FAILURE;
+            }
+            MAKE_STD_ZVAL(matrix[idx]);
+            ZVAL_COPY_VALUE(matrix[idx], *data2);
 
-        j_prev = n;
+            ++idx;
+        }
     }
 
     out->n = n;
@@ -68,24 +87,16 @@ int php_matrix_init_matrix(ZMatrix* out, zval* php_matrix)
 
 void php_matrix_free(ZMatrix matrix)
 {
-    int i, j;
-    for(i = 0; i < matrix.m; ++i)
+    int eCnt, idx;
+    eCnt = matrix.m * matrix.n;
+    for(idx = 0; idx < eCnt; ++idx)
     {
-        for(j = 0; j < matrix.n; ++j)
-        {
-            zval_ptr_dtor(&matrix.matrix[i][j]);
-        }
-        efree(matrix.matrix[i]);
+        zval_ptr_dtor(&matrix.matrix[idx]);
     }
     efree(matrix.matrix);
 }
 
 void php_matrix_free_matrix(ZMatrix matrix)
 {
-    int i;
-    for(i = 0; i < matrix.m; ++i)
-    {
-        efree(matrix.matrix[i]);
-    }
     efree(matrix.matrix);
 }

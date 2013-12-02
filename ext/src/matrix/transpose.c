@@ -26,7 +26,7 @@ PHP_FUNCTION(matrix_transpose)
         array_init(row);
         for(i = 0; i < m.m; ++i)
         {
-            add_next_index_zval(row, m.matrix[i][j]);
+            add_next_index_zval(row, m.matrix[i*m.n + j]);
         }
         add_next_index_zval(return_value, row);
     }
