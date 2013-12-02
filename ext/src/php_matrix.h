@@ -7,6 +7,8 @@
 PHP_FUNCTION(matrix_is_valid);
 PHP_FUNCTION(matrix_dump);
 PHP_FUNCTION(matrix_transpose);
+PHP_FUNCTION(matrix_add_int);
+PHP_FUNCTION(matrix_add_float);
 
 extern zend_module_entry matrix_module_entry;
 #define phpext_matrix_ptr &matrix_module_entry

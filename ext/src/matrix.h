@@ -14,9 +14,17 @@ typedef struct DMatrix{
 typedef struct IMatrix{
     int m; //i, rows
     int n; //j, columns
-    int *matrix;
+    long *matrix;
 } IMatrix;
+
+int php_imatrix_to_pzval(IMatrix, zval*);
 
 int php_matrix_init_matrix(ZMatrix*, zval*);
 void php_matrix_free(ZMatrix);
 void php_matrix_free_matrix(ZMatrix);
+
+int php_matrix_init_matrix_double(DMatrix*, zval*);
+void php_matrix_free_double(DMatrix);
+
+int php_matrix_init_matrix_int(IMatrix*, zval*);
+void php_matrix_free_int(IMatrix);
