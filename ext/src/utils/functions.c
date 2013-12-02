@@ -6,7 +6,7 @@ int php_matrix_init_matrix(ZMatrix* out, zval* php_matrix)
 {
     zval **data, **data2;
     int n, j_prev, m, i, j;
-    HashTable *ij_hash, *i_hash;
+    HashTable *j_hash, *i_hash;
     HashPosition pointer, pointer2;
     zval ***matrix;
 
