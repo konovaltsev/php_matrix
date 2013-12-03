@@ -37,5 +37,6 @@ void php_array_add_sum_long(zval*, zval*, zval*);
 void php_array_add_sum_double(zval*, zval*, zval*);
 void php_array_add_mul_zvals_to_long(zval*, zval*, zval*);
 void php_array_add_mul_zvals_to_double(zval*, zval*, zval*);
+
 double php_matrix_mul_double(double, double);
 long php_matrix_mul_long(long, long);

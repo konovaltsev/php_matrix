@@ -277,7 +277,7 @@ void php_matrix_elementwise_function(zval *return_value, zval *arg_matrix1, zval
             Z_TYPE_PP(data2_1) != IS_ARRAY
         )
         {
-            zval_ptr_dtor(&return_value);
+            zval_dtor(return_value);
             RETURN_NULL();
         }
 
@@ -285,7 +285,7 @@ void php_matrix_elementwise_function(zval *return_value, zval *arg_matrix1, zval
         j2_hash = Z_ARRVAL_PP(data2_1);
         if(zend_hash_num_elements(j1_hash) != n || zend_hash_num_elements(j2_hash) != n)
         {
-            zval_ptr_dtor(&return_value);
+            zval_dtor(return_value);
             RETURN_NULL();
         }
 
@@ -299,14 +299,14 @@ void php_matrix_elementwise_function(zval *return_value, zval *arg_matrix1, zval
         {
             if(zend_hash_get_current_data_ex(j1_hash, (void**) &data1_2, &pointer1_2) != SUCCESS)
             {
-                zval_ptr_dtor(&row);
-                zval_ptr_dtor(&return_value);
+                zval_dtor(row);
+                zval_dtor(return_value);
                 RETURN_NULL();
             }
             if(zend_hash_get_current_data_ex(j2_hash, (void**) &data2_2, &pointer2_2) != SUCCESS)
             {
-                zval_ptr_dtor(&row);
-                zval_ptr_dtor(&return_value);
+                zval_dtor(row);
+                zval_dtor(return_value);
                 RETURN_NULL();
             }
 
@@ -358,14 +358,14 @@ void php_matrix_scalar_matrix_function(zval *return_value, double arg_scalar, zv
             Z_TYPE_PP(data1_1) != IS_ARRAY
         )
         {
-            zval_ptr_dtor(&return_value);
+            zval_dtor(return_value);
             RETURN_NULL();
         }
 
         j1_hash = Z_ARRVAL_PP(data1_1);
         if(zend_hash_num_elements(j1_hash) != n)
         {
-            zval_ptr_dtor(&return_value);
+            zval_dtor(return_value);
             RETURN_NULL();
         }
 
@@ -379,8 +379,8 @@ void php_matrix_scalar_matrix_function(zval *return_value, double arg_scalar, zv
         {
             if(zend_hash_get_current_data_ex(j1_hash, (void**) &data1_2, &pointer1_2) != SUCCESS)
             {
-                zval_ptr_dtor(&row);
-                zval_ptr_dtor(&return_value);
+                zval_dtor(row);
+                zval_dtor(return_value);
                 RETURN_NULL();
             }
 
@@ -438,14 +438,14 @@ void php_matrix_scalar_matrix_function_long(zval *return_value, long arg_scalar,
             Z_TYPE_PP(data1_1) != IS_ARRAY
         )
         {
-            zval_ptr_dtor(&return_value);
+            zval_dtor(return_value);
             RETURN_NULL();
         }
 
         j1_hash = Z_ARRVAL_PP(data1_1);
         if(zend_hash_num_elements(j1_hash) != n)
         {
-            zval_ptr_dtor(&return_value);
+            zval_dtor(return_value);
             RETURN_NULL();
         }
 
@@ -459,8 +459,8 @@ void php_matrix_scalar_matrix_function_long(zval *return_value, long arg_scalar,
         {
             if(zend_hash_get_current_data_ex(j1_hash, (void**) &data1_2, &pointer1_2) != SUCCESS)
             {
-                zval_ptr_dtor(&row);
-                zval_ptr_dtor(&return_value);
+                zval_dtor(row);
+                zval_dtor(return_value);
                 RETURN_NULL();
             }
 
