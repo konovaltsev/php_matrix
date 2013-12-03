@@ -11,6 +11,8 @@ PHP_FUNCTION(matrix_add_int);
 PHP_FUNCTION(matrix_add_float);
 PHP_FUNCTION(matrix_mul_elementwise_int);
 PHP_FUNCTION(matrix_mul_elementwise_float);
+PHP_FUNCTION(matrix_mul_scalar_matrix);
+PHP_FUNCTION(matrix_mul_scalar_matrix_int);
 
 extern zend_module_entry matrix_module_entry;
 #define phpext_matrix_ptr &matrix_module_entry

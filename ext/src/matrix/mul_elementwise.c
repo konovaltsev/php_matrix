@@ -11,7 +11,7 @@ PHP_FUNCTION(matrix_mul_elementwise_int)
         RETURN_NULL();
     }
 
-    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_scalar_int);
+    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_zvals_to_int);
 }
 
 PHP_FUNCTION(matrix_mul_elementwise_float)
@@ -23,10 +23,10 @@ PHP_FUNCTION(matrix_mul_elementwise_float)
         RETURN_NULL();
     }
 
-    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_scalar_double);
+    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_zvals_to_double);
 }
 
-void php_array_add_mul_scalar_int(zval *row, zval *data1, zval *data2)
+void php_array_add_mul_zvals_to_int(zval *row, zval *data1, zval *data2)
 {
     long x1, x2;
     zval temp;
@@ -46,7 +46,7 @@ void php_array_add_mul_scalar_int(zval *row, zval *data1, zval *data2)
     add_next_index_long(row, x1 * x2);
 }
 
-void php_array_add_mul_scalar_double(zval *row, zval *data1, zval *data2)
+void php_array_add_mul_zvals_to_double(zval *row, zval *data1, zval *data2)
 {
     double x1, x2;
     zval temp;

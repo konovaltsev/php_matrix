@@ -227,7 +227,7 @@ void php_matrix_free_int(IMatrix matrix)
     efree(matrix.matrix);
 }
 
-int php_matrix_elementwise_function(zval *return_value, zval *arg_matrix1, zval *arg_matrix2, void (*f)(zval*, zval*, zval*))
+void php_matrix_elementwise_function(zval *return_value, zval *arg_matrix1, zval *arg_matrix2, void (*f)(zval*, zval*, zval*))
 {
     zval **data1_1, **data1_2;
     zval **data2_1, **data2_2;
@@ -314,4 +314,174 @@ int php_matrix_elementwise_function(zval *return_value, zval *arg_matrix1, zval 
         }
         add_next_index_zval(return_value, row);
     }
+}
+
+void php_matrix_scalar_matrix_function(zval *return_value, double arg_scalar, zval *arg_matrix, double (*f)(double, double))
+{
+    zval **data1_1, **data1_2;
+
+    HashTable *j1_hash, *i1_hash;
+    HashPosition pointer1_1, pointer1_2;
+    int i, j, m, n;
+
+    double a;
+
+    zval *row;
+
+    zval temp;
+
+    i1_hash = Z_ARRVAL_P(arg_matrix);
+    m = zend_hash_num_elements(i1_hash);
+
+    zend_hash_internal_pointer_reset_ex(i1_hash, &pointer1_1);
+    if(zend_hash_get_current_data_ex(i1_hash, (void**) &data1_1, &pointer1_1) == SUCCESS)
+    {
+        j1_hash = Z_ARRVAL_PP(data1_1);
+        n = zend_hash_num_elements(j1_hash);
+    }
+    else
+    {
+        RETURN_NULL();
+    }
+
+    array_init(return_value);
+    for(
+        i = 0, zend_hash_internal_pointer_reset_ex(i1_hash, &pointer1_1);
+        i < m;
+        ++i, zend_hash_move_forward_ex(i1_hash, &pointer1_1)
+    )
+    {
+        if
+        (
+            zend_hash_get_current_data_ex(i1_hash, (void**) &data1_1, &pointer1_1) != SUCCESS
+            ||
+            Z_TYPE_PP(data1_1) != IS_ARRAY
+        )
+        {
+            zval_ptr_dtor(&return_value);
+            RETURN_NULL();
+        }
+
+        j1_hash = Z_ARRVAL_PP(data1_1);
+        if(zend_hash_num_elements(j1_hash) != n)
+        {
+            zval_ptr_dtor(&return_value);
+            RETURN_NULL();
+        }
+
+        MAKE_STD_ZVAL(row);
+        array_init(row);
+        for(
+            j = 0, zend_hash_internal_pointer_reset_ex(j1_hash, &pointer1_2);
+            j < n;
+            ++j, zend_hash_move_forward_ex(j1_hash, &pointer1_2)
+        )
+        {
+            if(zend_hash_get_current_data_ex(j1_hash, (void**) &data1_2, &pointer1_2) != SUCCESS)
+            {
+                zval_ptr_dtor(&row);
+                zval_ptr_dtor(&return_value);
+                RETURN_NULL();
+            }
+
+            temp = **data1_2;
+            zval_copy_ctor(&temp);
+            convert_to_double(&temp);
+            a = Z_DVAL(temp);
+            zval_dtor(&temp);
+
+            add_next_index_double(row, f(arg_scalar, a));
+        }
+        add_next_index_zval(return_value, row);
+    }
+}
+
+void php_matrix_scalar_matrix_function_int(zval *return_value, long arg_scalar, zval *arg_matrix, long (*f)(long, long))
+{
+    zval **data1_1, **data1_2;
+
+    HashTable *j1_hash, *i1_hash;
+    HashPosition pointer1_1, pointer1_2;
+    int i, j, m, n;
+
+    long a;
+
+    zval *row;
+
+    zval temp;
+
+    i1_hash = Z_ARRVAL_P(arg_matrix);
+    m = zend_hash_num_elements(i1_hash);
+
+    zend_hash_internal_pointer_reset_ex(i1_hash, &pointer1_1);
+    if(zend_hash_get_current_data_ex(i1_hash, (void**) &data1_1, &pointer1_1) == SUCCESS)
+    {
+        j1_hash = Z_ARRVAL_PP(data1_1);
+        n = zend_hash_num_elements(j1_hash);
+    }
+    else
+    {
+        RETURN_NULL();
+    }
+
+    array_init(return_value);
+    for(
+        i = 0, zend_hash_internal_pointer_reset_ex(i1_hash, &pointer1_1);
+        i < m;
+        ++i, zend_hash_move_forward_ex(i1_hash, &pointer1_1)
+    )
+    {
+        if
+        (
+            zend_hash_get_current_data_ex(i1_hash, (void**) &data1_1, &pointer1_1) != SUCCESS
+            ||
+            Z_TYPE_PP(data1_1) != IS_ARRAY
+        )
+        {
+            zval_ptr_dtor(&return_value);
+            RETURN_NULL();
+        }
+
+        j1_hash = Z_ARRVAL_PP(data1_1);
+        if(zend_hash_num_elements(j1_hash) != n)
+        {
+            zval_ptr_dtor(&return_value);
+            RETURN_NULL();
+        }
+
+        MAKE_STD_ZVAL(row);
+        array_init(row);
+        for(
+            j = 0, zend_hash_internal_pointer_reset_ex(j1_hash, &pointer1_2);
+            j < n;
+            ++j, zend_hash_move_forward_ex(j1_hash, &pointer1_2)
+        )
+        {
+            if(zend_hash_get_current_data_ex(j1_hash, (void**) &data1_2, &pointer1_2) != SUCCESS)
+            {
+                zval_ptr_dtor(&row);
+                zval_ptr_dtor(&return_value);
+                RETURN_NULL();
+            }
+
+            temp = **data1_2;
+            zval_copy_ctor(&temp);
+            convert_to_long(&temp);
+            a = Z_LVAL(temp);
+            zval_dtor(&temp);
+
+            add_next_index_long(row, f(arg_scalar, a));
+        }
+        add_next_index_zval(return_value, row);
+    }
+}
+
+double php_matrix_mul(double x1, double x2)
+{
+    return x1 * x2;
+}
+
+long php_matrix_mul_int(long x1, long x2)
+{
+    return x1 * x2;
 }
