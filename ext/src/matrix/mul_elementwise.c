@@ -2,7 +2,7 @@
 
 #include "src/matrix.h"
 
-PHP_FUNCTION(matrix_add_int)
+PHP_FUNCTION(matrix_mul_elementwise_int)
 {
     zval *arg_matrix1, *arg_matrix2;
 
@@ -11,10 +11,10 @@ PHP_FUNCTION(matrix_add_int)
         RETURN_NULL();
     }
 
-    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_sum_int);
+    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_scalar_int);
 }
 
-PHP_FUNCTION(matrix_add_float)
+PHP_FUNCTION(matrix_mul_elementwise_float)
 {
     zval *arg_matrix1, *arg_matrix2;
 
@@ -23,10 +23,10 @@ PHP_FUNCTION(matrix_add_float)
         RETURN_NULL();
     }
 
-    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_sum_double);
+    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_scalar_double);
 }
 
-void php_array_add_sum_int(zval *row, zval *data1, zval *data2)
+void php_array_add_mul_scalar_int(zval *row, zval *data1, zval *data2)
 {
     long x1, x2;
     zval temp;
@@ -43,10 +43,10 @@ void php_array_add_sum_int(zval *row, zval *data1, zval *data2)
     x2 = Z_LVAL(temp);
     zval_dtor(&temp);
 
-    add_next_index_long(row, x1 + x2);
+    add_next_index_long(row, x1 * x2);
 }
 
-void php_array_add_sum_double(zval *row, zval *data1, zval *data2)
+void php_array_add_mul_scalar_double(zval *row, zval *data1, zval *data2)
 {
     double x1, x2;
     zval temp;
@@ -63,5 +63,5 @@ void php_array_add_sum_double(zval *row, zval *data1, zval *data2)
     x2 = Z_DVAL(temp);
     zval_dtor(&temp);
 
-    add_next_index_double(row, x1 + x2);
+    add_next_index_double(row, x1 * x2);
 }

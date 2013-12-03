@@ -29,7 +29,9 @@ void php_matrix_free_double(DMatrix);
 int php_matrix_init_matrix_int(IMatrix*, zval*);
 void php_matrix_free_int(IMatrix);
 
-int php_matrix_scalar_function(zval*, zval*, zval*, void (*f)(zval*, zval*, zval*));
+int php_matrix_elementwise_function(zval*, zval*, zval*, void (*f)(zval*, zval*, zval*));
 
 void php_array_add_sum_int(zval*, zval*, zval*);
 void php_array_add_sum_double(zval*, zval*, zval*);
+void php_array_add_mul_scalar_int(zval*, zval*, zval*);
+void php_array_add_mul_scalar_double(zval*, zval*, zval*);

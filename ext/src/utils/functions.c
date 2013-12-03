@@ -227,7 +227,7 @@ void php_matrix_free_int(IMatrix matrix)
     efree(matrix.matrix);
 }
 
-int php_matrix_scalar_function(zval *return_value, zval *arg_matrix1, zval *arg_matrix2, void (*f)(zval*, zval*, zval*))
+int php_matrix_elementwise_function(zval *return_value, zval *arg_matrix1, zval *arg_matrix2, void (*f)(zval*, zval*, zval*))
 {
     zval **data1_1, **data1_2;
     zval **data2_1, **data2_2;
