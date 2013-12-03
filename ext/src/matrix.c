@@ -10,6 +10,8 @@ const zend_function_entry matrix_functions[] = {
     PHP_FE(matrix_is_valid, NULL)
     PHP_FE(matrix_dump, NULL)
     PHP_FE(matrix_transpose, NULL)
+    PHP_FE(matrix_add_int, NULL)
+    PHP_FE(matrix_add_float, NULL)
     {NULL, NULL, NULL}
 };
 
