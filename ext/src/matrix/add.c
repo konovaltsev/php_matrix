@@ -11,10 +11,10 @@ PHP_FUNCTION(matrix_add_int)
         RETURN_NULL();
     }
 
-    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_sum_int);
+    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_sum_long);
 }
 
-PHP_FUNCTION(matrix_add_float)
+PHP_FUNCTION(matrix_add)
 {
     zval *arg_matrix1, *arg_matrix2;
 
@@ -26,7 +26,7 @@ PHP_FUNCTION(matrix_add_float)
     php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_sum_double);
 }
 
-void php_array_add_sum_int(zval *row, zval *data1, zval *data2)
+void php_array_add_sum_long(zval *row, zval *data1, zval *data2)
 {
     long x1, x2;
     zval temp;

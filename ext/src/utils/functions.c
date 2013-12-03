@@ -95,7 +95,7 @@ int php_matrix_init_matrix(ZMatrix* out, zval* php_matrix)
     return SUCCESS;
 }
 
-int php_matrix_init_matrix_int(IMatrix* out, zval* php_matrix)
+int php_matrix_init_matrix_long(LMatrix* out, zval* php_matrix)
 {
     zval **data, **data2;
     int n, m, i, j, idx, i_mem;
@@ -182,7 +182,7 @@ int php_matrix_init_matrix_int(IMatrix* out, zval* php_matrix)
     return SUCCESS;
 }
 
-int php_imatrix_to_pzval(IMatrix matrix, zval* ret)
+int php_lmatrix_to_pzval(LMatrix matrix, zval* ret)
 {
     int i, j, idx = 0;
     zval *row;
@@ -222,7 +222,7 @@ void php_matrix_free_double(DMatrix matrix)
     efree(matrix.matrix);
 }
 
-void php_matrix_free_int(IMatrix matrix)
+void php_matrix_free_long(LMatrix matrix)
 {
     efree(matrix.matrix);
 }
@@ -396,7 +396,7 @@ void php_matrix_scalar_matrix_function(zval *return_value, double arg_scalar, zv
     }
 }
 
-void php_matrix_scalar_matrix_function_int(zval *return_value, long arg_scalar, zval *arg_matrix, long (*f)(long, long))
+void php_matrix_scalar_matrix_function_long(zval *return_value, long arg_scalar, zval *arg_matrix, long (*f)(long, long))
 {
     zval **data1_1, **data1_2;
 
@@ -476,12 +476,12 @@ void php_matrix_scalar_matrix_function_int(zval *return_value, long arg_scalar, 
     }
 }
 
-double php_matrix_mul(double x1, double x2)
+double php_matrix_mul_double(double x1, double x2)
 {
     return x1 * x2;
 }
 
-long php_matrix_mul_int(long x1, long x2)
+long php_matrix_mul_long(long x1, long x2)
 {
     return x1 * x2;
 }

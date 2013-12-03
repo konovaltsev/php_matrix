@@ -11,9 +11,9 @@ const zend_function_entry matrix_functions[] = {
     PHP_FE(matrix_dump, NULL)
     PHP_FE(matrix_transpose, NULL)
     PHP_FE(matrix_add_int, NULL)
-    PHP_FE(matrix_add_float, NULL)
+    PHP_FE(matrix_add, NULL)
     PHP_FE(matrix_mul_elementwise_int, NULL)
-    PHP_FE(matrix_mul_elementwise_float, NULL)
+    PHP_FE(matrix_mul_elementwise, NULL)
     PHP_FE(matrix_mul_scalar_matrix, NULL)
     PHP_FE(matrix_mul_scalar_matrix_int, NULL)
     {NULL, NULL, NULL}

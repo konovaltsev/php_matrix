@@ -12,7 +12,7 @@ PHP_FUNCTION(matrix_mul_scalar_matrix)
         RETURN_NULL();
     }
 
-    php_matrix_scalar_matrix_function(return_value, arg_scalar, arg_matrix, &php_matrix_mul);
+    php_matrix_scalar_matrix_function(return_value, arg_scalar, arg_matrix, &php_matrix_mul_double);
 }
 
 PHP_FUNCTION(matrix_mul_scalar_matrix_int)
@@ -25,5 +25,5 @@ PHP_FUNCTION(matrix_mul_scalar_matrix_int)
         RETURN_NULL();
     }
 
-    php_matrix_scalar_matrix_function_int(return_value, arg_scalar, arg_matrix, &php_matrix_mul_int);
+    php_matrix_scalar_matrix_function_long(return_value, arg_scalar, arg_matrix, &php_matrix_mul_long);
 }

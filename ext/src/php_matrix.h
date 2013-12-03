@@ -8,9 +8,9 @@ PHP_FUNCTION(matrix_is_valid);
 PHP_FUNCTION(matrix_dump);
 PHP_FUNCTION(matrix_transpose);
 PHP_FUNCTION(matrix_add_int);
-PHP_FUNCTION(matrix_add_float);
+PHP_FUNCTION(matrix_add);
 PHP_FUNCTION(matrix_mul_elementwise_int);
-PHP_FUNCTION(matrix_mul_elementwise_float);
+PHP_FUNCTION(matrix_mul_elementwise);
 PHP_FUNCTION(matrix_mul_scalar_matrix);
 PHP_FUNCTION(matrix_mul_scalar_matrix_int);
 

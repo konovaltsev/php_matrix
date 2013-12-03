@@ -153,11 +153,11 @@ var_dump(memory_get_usage());
 $t1 = microtime(true);
 for($i = 0; $i < $c; ++$i)
 {
-    matrix_add_float($m1, $m2);
+    matrix_add($m1, $m2);
 }
 $t2 = microtime(true);
 var_dump(memory_get_usage());
-matrix_dump(matrix_add_float($m1, $m2));
+matrix_dump(matrix_add($m1, $m2));
 echo 'c: ' . ($t2 - $t1) . PHP_EOL;
 
 $t1 = microtime(true);

@@ -11,10 +11,10 @@ PHP_FUNCTION(matrix_mul_elementwise_int)
         RETURN_NULL();
     }
 
-    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_zvals_to_int);
+    php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_zvals_to_long);
 }
 
-PHP_FUNCTION(matrix_mul_elementwise_float)
+PHP_FUNCTION(matrix_mul_elementwise)
 {
     zval *arg_matrix1, *arg_matrix2;
 
@@ -26,7 +26,7 @@ PHP_FUNCTION(matrix_mul_elementwise_float)
     php_matrix_elementwise_function(return_value, arg_matrix1, arg_matrix2, &php_array_add_mul_zvals_to_double);
 }
 
-void php_array_add_mul_zvals_to_int(zval *row, zval *data1, zval *data2)
+void php_array_add_mul_zvals_to_long(zval *row, zval *data1, zval *data2)
 {
     long x1, x2;
     zval temp;
