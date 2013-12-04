@@ -1,0 +1,4 @@
+#! /bin/sh
+
+TEST_PHP_ARGS="--show-all" make test
+TEST_PHP_ARGS="-m" make test
