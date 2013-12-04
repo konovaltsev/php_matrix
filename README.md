@@ -1,7 +1,20 @@
-php_matrix
-==========
+matrix
+======
 
-PHP extention for matrix operations
+PHP extension for matrix operations
+
+Features
+--------
+
+* Addition
+* Scalar multiplication
+* Transposition
+* Matrix multiplication
+* Elementwise multiplication
+* Matrix dump
+
+Getting started
+---------------
 
 ### Build (linux):
 ~~~
