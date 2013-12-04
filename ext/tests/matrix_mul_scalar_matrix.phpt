@@ -31,6 +31,7 @@ $mem1 = memory_get_usage();
 var_dump(matrix_mul_scalar_matrix($s, $m));
 $mem2 = memory_get_usage();
 var_dump($mem2 - $mem1);
+var_dump(matrix_mul_scalar_matrix($s, array(1, 2, 3)));
 ?>
 === DONE ===
 --EXPECTF--
@@ -40,4 +41,5 @@ matrix[2x3]:
 int(0)
 NULL
 int(0)
+NULL
 === DONE ===

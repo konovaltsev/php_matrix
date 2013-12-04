@@ -32,6 +32,7 @@ matrix_transpose(
 );
 $mem2 = memory_get_usage();
 var_dump($mem2 - $mem1);
+var_dump(matrix_transpose(array(1, 2, 3)));
 ?>
 === DONE ===
 --EXPECTF--
@@ -42,4 +43,5 @@ matrix[3x2]:
 NULL
 int(0)
 int(0)
+NULL
 === DONE ===

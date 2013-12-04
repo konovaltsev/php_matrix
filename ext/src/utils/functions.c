@@ -24,6 +24,10 @@ int php_matrix_init_matrix(ZMatrix* out, zval* php_matrix)
     m = zend_hash_num_elements(i_hash);
     if(zend_hash_get_current_data_ex(i_hash, (void**) &data, &pointer) == SUCCESS)
     {
+        if (Z_TYPE_PP(data) != IS_ARRAY)
+        {
+            return FAILURE;
+        }
         j_hash = Z_ARRVAL_PP(data);
         n = zend_hash_num_elements(j_hash);
     }
@@ -119,6 +123,10 @@ int php_matrix_init_matrix_double(DMatrix* out, zval* php_matrix)
     m = zend_hash_num_elements(i_hash);
     if(zend_hash_get_current_data_ex(i_hash, (void**) &data, &pointer) == SUCCESS)
     {
+        if (Z_TYPE_PP(data) != IS_ARRAY)
+        {
+            return FAILURE;
+        }
         j_hash = Z_ARRVAL_PP(data);
         n = zend_hash_num_elements(j_hash);
     }
@@ -225,6 +233,10 @@ int php_matrix_init_matrix_long(LMatrix* out, zval* php_matrix)
     m = zend_hash_num_elements(i_hash);
     if(zend_hash_get_current_data_ex(i_hash, (void**) &data, &pointer) == SUCCESS)
     {
+        if (Z_TYPE_PP(data) != IS_ARRAY)
+        {
+            return FAILURE;
+        }
         j_hash = Z_ARRVAL_PP(data);
         n = zend_hash_num_elements(j_hash);
     }
@@ -357,6 +369,10 @@ void php_matrix_elementwise_function(zval *return_value, zval *arg_matrix1, zval
     zend_hash_internal_pointer_reset_ex(i1_hash, &pointer1_1);
     if(zend_hash_get_current_data_ex(i1_hash, (void**) &data1_1, &pointer1_1) == SUCCESS)
     {
+        if (Z_TYPE_PP(data1_1) != IS_ARRAY)
+        {
+            RETURN_NULL();
+        }
         j1_hash = Z_ARRVAL_PP(data1_1);
         n = zend_hash_num_elements(j1_hash);
     }
@@ -442,6 +458,10 @@ void php_matrix_scalar_matrix_function(zval *return_value, double arg_scalar, zv
     zend_hash_internal_pointer_reset_ex(i1_hash, &pointer1_1);
     if(zend_hash_get_current_data_ex(i1_hash, (void**) &data1_1, &pointer1_1) == SUCCESS)
     {
+        if (Z_TYPE_PP(data1_1) != IS_ARRAY)
+        {
+            RETURN_NULL();
+        }
         j1_hash = Z_ARRVAL_PP(data1_1);
         n = zend_hash_num_elements(j1_hash);
     }
@@ -522,6 +542,10 @@ void php_matrix_scalar_matrix_function_long(zval *return_value, long arg_scalar,
     zend_hash_internal_pointer_reset_ex(i1_hash, &pointer1_1);
     if(zend_hash_get_current_data_ex(i1_hash, (void**) &data1_1, &pointer1_1) == SUCCESS)
     {
+        if (Z_TYPE_PP(data1_1) != IS_ARRAY)
+        {
+            RETURN_NULL();
+        }
         j1_hash = Z_ARRVAL_PP(data1_1);
         n = zend_hash_num_elements(j1_hash);
     }

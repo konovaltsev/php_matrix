@@ -41,7 +41,7 @@ matrix_is_valid(
 );
 $mem2 = memory_get_usage();
 var_dump($mem2 - $mem1);
-
+var_dump(matrix_is_valid(array(1, 2, 3)));
 ?>
 === DONE ===
 --EXPECTF--
@@ -49,4 +49,5 @@ bool(true)
 int(0)
 bool(false)
 int(0)
+bool(false)
 === DONE ===

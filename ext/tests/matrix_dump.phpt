@@ -23,6 +23,7 @@ matrix_dump(
 );
 $mem2 = memory_get_usage();
 var_dump($mem2 - $mem1);
+matrix_dump(array(1, 2, 3));
 ?>
 === DONE ===
 --EXPECTF--
@@ -31,4 +32,5 @@ matrix[2x3]:
 |%w<undef>%w5.500%w"q"%w|
 matrix[not valid]
 int(0)
+matrix[not valid]
 === DONE ===
