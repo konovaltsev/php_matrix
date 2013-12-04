@@ -13,6 +13,8 @@ PHP_FUNCTION(matrix_mul_elementwise_int);
 PHP_FUNCTION(matrix_mul_elementwise);
 PHP_FUNCTION(matrix_mul_scalar_matrix);
 PHP_FUNCTION(matrix_mul_scalar_matrix_int);
+PHP_FUNCTION(matrix_mul);
+PHP_FUNCTION(matrix_mul_int);
 
 extern zend_module_entry matrix_module_entry;
 #define phpext_matrix_ptr &matrix_module_entry
