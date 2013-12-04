@@ -4,6 +4,7 @@
 #define PHP_MATRIX_VERSION "1.0"
 #define PHP_MATRIX_EXTNAME "matrix"
 
+PHP_FUNCTION(matrix_version);
 PHP_FUNCTION(matrix_is_valid);
 PHP_FUNCTION(matrix_dump);
 PHP_FUNCTION(matrix_transpose);

@@ -7,6 +7,7 @@
 #include "matrix.h"
 
 const zend_function_entry matrix_functions[] = {
+    PHP_FE(matrix_version, NULL)
     PHP_FE(matrix_is_valid, NULL)
     PHP_FE(matrix_dump, NULL)
     PHP_FE(matrix_transpose, NULL)
