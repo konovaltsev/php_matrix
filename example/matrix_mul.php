@@ -10,3 +10,4 @@ $m2 = array(
 );
 
 matrix_dump(matrix_mul($m1, $m2));
+matrix_dump(matrix_mul_int($m1, $m2));
