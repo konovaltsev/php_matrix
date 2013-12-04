@@ -1,5 +1,5 @@
 --TEST--
-matrix_mul() function basic test
+matrix_mul_int() function basic test
 --CREDITS--
 Roman Konovaltsev rkonovaltsev@gmail.com
 --SKIPIF--
@@ -16,13 +16,13 @@ $m2 = array(
     array(2, 1, 4, 3.1),
 );
 
-matrix_dump(matrix_mul($m1, $m2));
+matrix_dump(matrix_mul_int($m1, $m2));
 
 $mem1 = 0;
 $mem2 = 0;
 
 $mem1 = memory_get_usage();
-matrix_mul($m1, $m2);
+matrix_mul_int($m1, $m2);
 $mem2 = memory_get_usage();
 var_dump($mem2 - $mem1);
 
@@ -39,7 +39,7 @@ $m2 = array(
 );
 
 $mem1 = memory_get_usage();
-var_dump(matrix_mul($m1, $m2));
+var_dump(matrix_mul_int($m1, $m2));
 $mem2 = memory_get_usage();
 var_dump($mem2 - $mem1);
 
@@ -54,7 +54,7 @@ $m2 = array(
 );
 
 $mem1 = memory_get_usage();
-var_dump(matrix_mul($m1, $m2));
+var_dump(matrix_mul_int($m1, $m2));
 $mem2 = memory_get_usage();
 var_dump($mem2 - $mem1);
 ?>
